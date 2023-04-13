@@ -1,12 +1,7 @@
-import 'dart:html';
 import 'package:camera/camera.dart';
 import 'package:face_detection/utils_scanner.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
-import 'package:flutter/cupertino.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -44,6 +39,7 @@ class _HomeState extends State<Home> {
             if (!isWorking)
               {
                 isWorking = true,
+                performDetectionOnStreamFrames(imageFromStream)
               }
           });
     });
@@ -172,7 +168,15 @@ class _HomeState extends State<Home> {
       ),
     ));
 
-    return Container();
+    return Scaffold(
+      body: Container(
+        margin: const EdgeInsets.only(top: 0),
+        color: Colors.black,
+        child: Stack(
+          children: stackWidgetChildren,
+        ),
+      ),
+    );
   }
 }
 

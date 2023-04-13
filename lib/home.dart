@@ -80,6 +80,24 @@ class _HomeState extends State<Home> {
     faceDetector!.close();
   }
 
+  Widget buildResult() {
+    if (scanResults != null ||
+        cameraController == null ||
+        !cameraController!.value.isInitialized) {
+      return const Text("");
+    }
+
+    final Size imageSize = Size(cameraController!.value.previewSize!.height,
+        cameraController!.value.previewSize!.width);
+
+    CustomPainter customPainter =
+        FaceDetectorPainter(imageSize, scanResults, cameraDirection);
+
+    return CustomPaint(
+      painter: customPainter,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
